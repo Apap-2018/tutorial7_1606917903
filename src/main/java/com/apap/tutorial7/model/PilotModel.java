@@ -1,6 +1,7 @@
 package com.apap.tutorial7.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * PilotModel
@@ -40,7 +43,8 @@ public class PilotModel implements Serializable{
 	private int flyHour;
 	
 	@OneToMany(mappedBy = "pilot", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<FlightModel> pilotFlight;
+	@JsonIgnore
+	private List<FlightModel> pilotFlight = new ArrayList<FlightModel>();
 
 	public long getId() {
 		return id;
